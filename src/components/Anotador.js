@@ -11,6 +11,8 @@ function Anotador() {
 
            
             setNota("");
+
+            document.getElementById("valorNota").focus();
         }
     }
  
@@ -23,9 +25,11 @@ function Anotador() {
     return (
         <>
             <h2>Notas</h2>
-            <input type="text" 
-            value={nota}
-            onChange= {e => setNota(e.target.value)}
+            <input
+                type="text"
+               id="valorNota"
+                value={nota}
+                onChange={(e) => setNota(e.target.value)}
             />
             <button onClick={guardarNotas}>Anotar</button>
             <ul>
