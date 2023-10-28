@@ -1,27 +1,43 @@
-import { useState } from 'react';
+import React, { useState } from 'react';
 
-function Anotador(){
-    const newNota = {
-        descripcion: ""
-    }
-
-    const [nota, setNota] = useState(newNota);
+function Anotador() {
+    const [nota, setNota] = useState("");
     const [notas, setNotas] = useState([]);
-    const guardar=()=>{
-        newNota.descripcion = valorNota.value;
-        setNota(anotacion);
-        document.getElementById("valorNota").value = "";
-        //<p>{anotacion}</p>
-       console.log(nota);
+
+    const guardarNotas = () => {
+        if (nota !== "") {
+            
+            setNotas([...notas, nota]);
+
+           
+            setNota("");
+        }
     }
-    return(
+ 
+    const eliminarNota = (index) => {
+        const nuevasNotas = [...notas];// decimos que la nueva const va a ser igual al arreglo de notas
+        nuevasNotas.splice(index, 1);
+        setNotas(nuevasNotas);
+    }
+
+    return (
         <>
-        <h2>Notas</h2>
-        <input type="text" id='valorNota' value={nota} onChange={guardar}></input>
-        <button onClick={guardar}>Anotar</button>
-        <p>{nota}</p>
-        
+            <h2>Notas</h2>
+            <input type="text" 
+            value={nota}
+            onChange= {e => setNota(e.target.value)}
+            />
+            <button onClick={guardarNotas}>Anotar</button>
+            <ul>
+                {notas.map((nota, index) => (
+                    <li key={index}>
+                        {nota}
+                        <button onClick={() => eliminarNota(index)}>Eliminar Nota</button>
+                    </li>
+                ))}
+            </ul>
         </>
-      ); 
+    );
 }
+
 export default Anotador;
