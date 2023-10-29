@@ -1,4 +1,39 @@
 import React, { useState } from 'react';
+import Button from 'react-bootstrap/Button';
+
+const containerStyle = {
+  display: 'flex',
+  flexDirection: 'column',
+  alignItems: 'center',
+  justifyContent: 'center',
+  height: '100vh',
+  backgroundColor: 'darkgray',
+  color: 'white', // Cambia el color de la letra a rojo
+};
+
+const inputStyle = {
+  fontSize: '24px',
+  padding: '10px',
+  width: '80%',
+  margin: '10px',
+  textAlign: 'center',
+};
+
+const ulStyle = {
+  listStyle: 'none',
+  padding: '0',
+};
+
+const listItemStyle = {
+  display: 'flex',
+  justifyContent: 'center',
+  alignItems: 'center',
+  background: 'darkgray',
+  padding: '8px',
+  margin: '4px',
+  fontSize: '40px',
+  color: 'black'
+};
 
 function Anotador() {
     const notaInicial = {
@@ -33,24 +68,26 @@ function Anotador() {
     }
 
     return (
-        <>
+        <div style={containerStyle}>
             <h2>Notas</h2>
             <input
                 type="text"
                 id="valorNota"
                 value={nota.descripcion}
                 onChange={(e) => setNota({ ...nota, descripcion: e.target.value })}
+                style={inputStyle}
             />
-            <button onClick={guardarNotas}>Anotar</button>
-            <ul>
+            <Button onClick={guardarNotas} variant="primary">Anotar</Button>
+           
+            <ul style={ulStyle}>
                 {notas.map((nota, index) => (
-                    <li key={index}>
+                    <li key={index} style={listItemStyle}>
                         {nota.descripcion}
-                        <button onClick={() => eliminarNota(index)}>Eliminar Nota</button>
+                        <Button onClick={() => eliminarNota(index)} variant="warning">Eliminar Nota</Button>
                     </li>
                 ))}
             </ul>
-        </>
+        </div>
     );
 }
 
