@@ -3,6 +3,9 @@ import Button from 'react-bootstrap/Button';
 //import Button from 'react-bootstrap/Button';
 import Card from 'react-bootstrap/Card';
 import {Row} from 'react-bootstrap';
+
+import ProcesadorNotas from './ProcesadorNotas';
+import NotasResueltas from './NotasResueltas';
 const containerStyle = {
   display: 'flex',
   flexDirection: 'column',
@@ -79,11 +82,20 @@ function Anotador() {
     const procesarNota = (index) => {
         const otraNota =notas[index];
         setNotasEnProceso([...notasEnProceso, otraNota]);
+
+        const sacarNota = [...notas];
+        sacarNota.splice(index,1);
+        setNotas(sacarNota);
     }
 
     const resolverNota = (index) => {
-      const otherNota = notas[index];
+      const otherNota = notasEnProceso[index];
       setNotasResueltas([...notasResueltas, otherNota]);
+
+      const resueltaNota = [...notasEnProceso];
+      resueltaNota.splice(index,1);
+      setNotasEnProceso(resueltaNota);
+
     }
 
     return (
@@ -127,14 +139,19 @@ function Anotador() {
                       </Card.Text>
                       <Button onClick={() => eliminarNota(index)} variant="warning">Eliminar Nota</Button>
                       <Button onClick={()=> procesarNota(index)}>En Proceso</Button>
-                      <Button onClick={()=> resolverNota(index)}>Resuelto</Button>
+                      {/* <Button onClick={()=> resolverNota(index)}>Resuelto</Button> */}
                     </Card.Body>
                   </Card>
                 ))}
                 </Row> 
             </ul>
             <h2>Notas en proceso</h2>
-            <ul style={ulStyle}>
+            <ProcesadorNotas
+                  notasEnProceso={notasEnProceso}
+                  eliminarNota={eliminarNota}
+                  resolverNota={resolverNota}
+            />
+            {/* <ul style={ulStyle}>
                <Row>
                 {notasEnProceso.map((nota, index) => (
                     <Card key={index} style={{ width: '18rem' }}>
@@ -142,18 +159,20 @@ function Anotador() {
                       <Card.Title>{nota.titulo}</Card.Title>
                       <Card.Text>
                             {nota.descripcion}<br></br>
-                            {/* {nota.estado} */}
                       </Card.Text>
                       <Button onClick={() => eliminarNota(index)} variant="warning">Eliminar Nota</Button>
-                      {/* <Button onClick={()=> procesarNota(index)}>En Proceso</Button>
-                      <Button>Resuelto</Button> */}
+                      <Button onClick={()=> resolverNota(index)}>Resuelto</Button>
                     </Card.Body>
                   </Card>
                 ))}
                 </Row> 
-            </ul>
+            </ul> */}
             <h2>Notas resueltas</h2>
-            <ul style={ulStyle}>
+            <NotasResueltas
+                  notasResueltas={notasResueltas}
+                  eliminarNota={eliminarNota}
+            />
+            {/* <ul style={ulStyle}>
                <Row>
                 {notasResueltas.map((nota, index) => (
                     <Card key={index} style={{ width: '18rem' }}>
@@ -161,16 +180,13 @@ function Anotador() {
                       <Card.Title>{nota.titulo}</Card.Title>
                       <Card.Text>
                             {nota.descripcion}<br></br>
-                            {/* {nota.estado} */}
                       </Card.Text>
                       <Button onClick={() => eliminarNota(index)} variant="warning">Eliminar Nota</Button>
-                      {/* <Button onClick={()=> procesarNota(index)}>En Proceso</Button>
-                      <Button>Resuelto</Button> */}
                     </Card.Body>
                   </Card>
                 ))}
                 </Row> 
-            </ul>
+            </ul> */}
         </div>
     );
 }
