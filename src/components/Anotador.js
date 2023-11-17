@@ -1,15 +1,19 @@
 import React, { useState } from 'react';
 import Button from 'react-bootstrap/Button';
+import Container from 'react-bootstrap/Container';
+import Row from 'react-bootstrap/Row';
+import Col from 'react-bootstrap/Col';
 import ProcesadorNotas from './ProcesadorNotas';
 import NotasResueltas from './NotasResueltas';
 import Notas from './Notas';
+
 const containerStyle = {
   display: 'flex',
   flexDirection: 'column',
   alignItems: 'center',
   justifyContent: 'center',
   height: '100vh',
-  backgroundColor: 'darkgray',
+  backgroundColor: '#BB8FCE ',
   color: 'white', // Cambia el color de la letra a rojo
 };
 
@@ -21,21 +25,6 @@ const inputStyle = {
   textAlign: 'center',
 };
 
-const ulStyle = {
-  listStyle: 'none',
-  padding: '0',
-};
-
-const listItemStyle = {
-  display: 'flex',
-  justifyContent: 'center',
-  alignItems: 'center',
-  background: 'darkgray',
-  padding: '8px',
-  margin: '4px',
-  fontSize: '40px',
-  color: 'black'
-};
 
 function Anotador() {
     const notaInicial = {
@@ -109,8 +98,9 @@ function Anotador() {
 
     return (
         <div style={containerStyle}>
-            <h2>Notas</h2>
+            <h1>Notas</h1>
             <input
+                placeholder='Escriba el título de su nota'
                 type="text"
                 id="tituloNota"
                 value={nota.titulo}
@@ -118,6 +108,7 @@ function Anotador() {
                 style={inputStyle}
             />
             <input
+                placeholder='Escriba la descripción de su nota'
                 type="text"
                 id="valorNota"
                 value={nota.descripcion}
@@ -126,22 +117,36 @@ function Anotador() {
             />
             <Button onClick={guardarNotas} variant="primary">Anotar</Button>
            
-            <Notas
-                  notas={notas}
-                  eliminarNota={eliminarNota}
-                  procesarNota={procesarNota}
-            />
-            <h2>Notas en proceso</h2>
-            <ProcesadorNotas
-                  notasEnProceso={notasEnProceso}
-                  eliminarNotaProceso={eliminarNotaProceso}
-                  resolverNota={resolverNota}
-            />
-            <h2>Notas resueltas</h2>
-            <NotasResueltas
-                  notasResueltas={notasResueltas}
-                  eliminarNotaResuelta={eliminarNotaResuelta}
-            />
+            <Container style={{justifyContent: 'center', alignItems: 'center'}}>
+            <Row>
+              <Col style={{backgroundColor: '#58D68D', textAlign: 'center', justifyContent: 'center', alignItems: 'center'}}>
+              <h2 style={{color: 'black'}}>Notas cargadas</h2>
+                <Notas
+                    notas={notas}
+                    eliminarNota={eliminarNota}
+                    procesarNota={procesarNota}
+                />
+              </Col>
+              <Col style={{backgroundColor: '#F0B27A', textAlign: 'center'}}>
+                <h2 style={{color: 'black'}}>Notas en proceso</h2>
+                <ProcesadorNotas
+                    notasEnProceso={notasEnProceso}
+                    eliminarNotaProceso={eliminarNotaProceso}
+                    resolverNota={resolverNota}
+                />
+              </Col>
+              <Col style={{backgroundColor: '#5DADE2', textAlign: 'center'}}>
+              <h2 style={{color: 'black'}}>Notas resueltas</h2>
+              <NotasResueltas
+                    notasResueltas={notasResueltas}
+                    eliminarNotaResuelta={eliminarNotaResuelta}
+              />
+              </Col>
+            </Row>
+            </Container>
+            
+            
+            
         </div>
     );
 }
