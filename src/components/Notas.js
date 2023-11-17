@@ -36,19 +36,25 @@ const containerStyle = {
     fontSize: '40px',
     color: 'black'
   };
-function ProcesadorNotas({notasEnProceso,eliminarNotaProceso,resolverNota}){
+
+function Notas({notas, eliminarNota, procesarNota}){
+    // const eliminarNota = (index) => {
+    //     const nuevasNotas = [...notas];
+    //     nuevasNotas.splice(index, 1);
+    //     setNotas(nuevasNotas);
+    // }
     return (
         <ul style={ulStyle}>
                <Row>
-                {notasEnProceso.map((nota, index) => (
+                {notas.map((nota, index) => (
                     <Card key={index} style={{ width: '18rem' }}>
                     <Card.Body>
                       <Card.Title>{nota.titulo}</Card.Title>
                       <Card.Text>
                             {nota.descripcion}<br></br>
                       </Card.Text>
-                      <Button onClick={() => eliminarNotaProceso(index)} variant="warning">Eliminar Nota</Button>
-                      <Button onClick={()=> resolverNota(index)}>Resuelto</Button>
+                      <Button onClick={() => eliminarNota(index)} variant="warning">Eliminar Nota</Button>
+                      <Button onClick={()=> procesarNota(index)}>En Proceso</Button>
                     </Card.Body>
                   </Card>
                 ))}
@@ -56,5 +62,4 @@ function ProcesadorNotas({notasEnProceso,eliminarNotaProceso,resolverNota}){
             </ul>
     );
 }
-
-export default ProcesadorNotas;
+export default Notas;

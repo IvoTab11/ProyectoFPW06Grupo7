@@ -36,7 +36,7 @@ const containerStyle = {
     fontSize: '40px',
     color: 'black'
   };
-function NotasResueltas({notasResueltas,eliminarNota}){
+function NotasResueltas({notasResueltas,eliminarNotaResuelta}){
     return (
         <ul style={ulStyle}>
                <Row>
@@ -47,7 +47,7 @@ function NotasResueltas({notasResueltas,eliminarNota}){
                       <Card.Text>
                             {nota.descripcion}<br></br>
                       </Card.Text>
-                      <Button onClick={() => eliminarNota(index)} variant="warning">Eliminar Nota</Button>
+                      <Button onClick={() => eliminarNotaResuelta(index)} variant="warning">Eliminar Nota</Button>
                     </Card.Body>
                   </Card>
                 ))}
